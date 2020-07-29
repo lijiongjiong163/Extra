@@ -1,0 +1,3 @@
+mvn install:install-file -Dfile=F:\downloads\jodconverter-2.2.2\jodconverter-2.2.2\lib\jodconverter-2.2.2.jar -DgroupId=com.hand.hap -DartifactId=jodconverter -Dversion=2.2.2 -Dpackaging=jar -DgeneratePom=true -DcreateChecksum=true
+
+ 

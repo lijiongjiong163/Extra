@@ -1,0 +1,1 @@
+select * from user_triggers where table_name=upper('表名');  
