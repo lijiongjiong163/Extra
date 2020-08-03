@@ -1,1 +1,3 @@
 select * from user_triggers where table_name=upper('表名');  
+
+select text from all_source where type='TRIGGER' AND name=upper('触发器名');
