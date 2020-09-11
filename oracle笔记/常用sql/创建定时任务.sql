@@ -80,3 +80,7 @@ select * from job_table
 select * from user_jobs;
 --清除记录
 delete from job_table
+--手动调用定时job
+begin
+dbms_job.run(06);
+end;
