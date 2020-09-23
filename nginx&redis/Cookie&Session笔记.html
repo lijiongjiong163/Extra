@@ -94,7 +94,9 @@
 
 
 <span class="hljs-number">3.</span> 实现原理
-	* 基于响应头<span class="hljs-keyword">set</span>-cookie和请求头cookie实现
+	* 基于响应头<span class="hljs-keyword">set</span>-cookie和请求头cookie实现：
+		当你在客户端第一次<span class="hljs-keyword">new</span> cookie对象并add进response后，response中的响应头中就会出现一个<span class="hljs-keyword">set</span>-cookie的数据，把你的cookie存进客户端；
+		而在之后的会话中，客户端每次发request的时候，在请求头中就会有一个叫cookie的数据发给后台啦。
 
 <span class="hljs-number">4.</span> cookie的细节
 	<span class="hljs-number">1.</span> 一次可不可以发送多个cookie?
@@ -341,35 +343,9 @@
 		</div>
 			
 
-<h3 class="catListTitle">and a.desc12 in ('MRS0141','MRS0137','MRS0138','MRS0139','MRS0140','MR2090410028','MH1101660045','MH1101660046','MH1101660046PP','MH1101030161','MH1101030162')</h3>
+<h3 class="catListTitle"></h3>
 
-<div id="blog-news">
-    
-    <div id="profile_block">
-        昵称：
-        <a href="https://home.cnblogs.com/u/DemoLi/">
-            DemoLi
-        </a>
-        <br>
-        园龄：
-        <a href="https://home.cnblogs.com/u/DemoLi/" title="入园时间：2020-04-06">
-            3个月
-        </a>
-        <br>
-        粉丝：
-        <a href="https://home.cnblogs.com/u/DemoLi/followers/">
-            0
-        </a>
-        <br>
-        关注：
-        <a href="https://home.cnblogs.com/u/DemoLi/followees/">
-            1
-        </a>
-        <div id="p_b_follow">
-<a href="javascript:void(0)" onclick="follow(&#39;8b40e6bd-916f-44fa-cb1a-08d7d7b4fe7b&#39;)">+加关注</a></div>
-        <script>getFollowStatus('8b40e6bd-916f-44fa-cb1a-08d7d7b4fe7b');</script>
-    </div>
-</div>
+
 
 </div>
 
