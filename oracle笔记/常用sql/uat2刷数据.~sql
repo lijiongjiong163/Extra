@@ -47,11 +47,6 @@ begin
   PRO_ERPPL_CODE_ZJB();
 end;
 
-delete from mdm_wlzsh_code where desc1='sgsg' and desc16='N'
-select * from mdm_wlzsh_code where desc1='sgsg' and desc16='N' for update
+delete from mdm_wlzsh_code where desc1='afaf' and desc16='N'
+select * from mdm_wlzsh_code where desc1='afaf' and desc16='N' for update
 H1534AVBABC1234A12
-select * from mdm_wlflq_code
-select * from mdm_wlfl_code
-
-select * from szqmdm.mdm_wlflq_code
-select * from szqmdm.mdm_wlfl_code
