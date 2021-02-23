@@ -119,6 +119,212 @@ function fun(a) {
          fun(1,"ad",true);
 ```
 
+#### 3.4 this
+
+##### 3.4.1 this的本质
+
+对象中的函数，其实对象和函数没啥关系，JS之父通过this将他们强行关联起来：
+
+```js
+var obj = {
+        name : 'ziwei',
+        sayName: function(x){
+            return console.log('hello,' + x.name)
+        }
+    }
+//从本质来说，对象和其内部函数没关系，所以想要让这个对象say自己的name，还要把这对象传进去，尴尬
+obj.sayName(obj);
+```
+
+**为了能够obj.sayName(),让这个obj自己的传递进去,JS之父发明了this.（所以，this是针对函数所定义的，其它地方根本不存在this的）**
+
+你可以理解为JS做了一件事情,就是你每次调用函数时,都偷偷给你传递了一个参数,你用this就可以拿到这个参数。
+
+```javascript
+    var obj = {
+        name : 'ziwei',
+        sayName: function(){
+            return console.log('hello,' + this.name)
+        }
+    }
+    obj.sayName()   
+```
+
+
+
+##### 3.4.2 this的用法
+
+![](assets/javascript非严格模式下this的用法.png)
+
+
+
+#### 3.5函数中的this（和箭头函数的区别）
+
+首先明确几个概念：
+
+1.箭头函数没有this，在它里面使用this统统是使用它外面的环境的this
+
+2.自运行函数（快速调用函数）的调用者是window对象，无论在哪个函数或哪个对象中快速调用,都是window在调用。
+
+3.对象中的属性只能通过“对象名.属性名”去调用
+
+4.js是以函数来划分作用域的。
+
+
+```javascript
+<script type="text/javascript">
+		var name='window.name'
+		var a ={
+			name:'AAA',
+			f1:function(){
+				console.log(this.name);//偷偷把调用此函数的对象传进来了，并用this去调用
+			},
+			f2:()=>{
+				console.log(this.name);//箭头函数没有this，就用上级的this，上级this是window
+			},
+			f3:function(){
+				(()=>{
+				console.log(this.name)//箭头函数没有this，就用上级的this，上级this是f3的this
+			})()//虽然调用者是window，但是用的是上级this，上级this是f3的this，也就是a
+			}
+			,
+			f4:function(){
+				
+				(function(){
+				console.log(this.name)//偷偷把调用此函数的对象（window）传进来了，并用this去调用
+			})()//快速调用函数的调用者是window对象，无论在哪个函数或哪个对象中快速调用,都是window在调用
+			}
+			,
+			f5:function(){
+				var s= ()=>{
+				console.log(this.name)//使用父环境的this，也就是f5的this，所以就算window立即调用，也不影响
+			}
+			s();
+			}
+			,
+			f6:function(){
+				var name = 'f6';
+				console.log(name);//这里的name就是指本作用域的name，也就是f6
+				console.log(this.name);//这里的this就是函数调用者把自己给f6传进来，所以谁调f6就是谁
+				var s= function(){
+					console.log('--------');
+				console.log(this.name);//同理，这就是个普通函数，谁调他，谁就把自己当成this传给他
+			}
+			s();//直接调用，由window完成
+			}
+			,
+			f7:function(){
+				console.log(this.name);//谁调就是谁
+				var s = function(){
+					console.log(this.name);
+				}
+				return s;//将这个函数当成返回值赋给另一个指针，谁调那个指针this就是谁
+			},
+			f8:function(){
+				console.log(this.name);//谁调就是谁
+				var s = ()=>{
+					console.log(this.name);//定义时用上级this
+				}
+				return s;
+			},
+			f9:()=>{
+				console.log(this.name);//用上级this，上级的this此时是window
+				(function(){
+					console.log(this.name);//谁调就是谁
+				})()//立即执行函数，由window调用
+			}
+		}
+		var b = {
+			name:'BBB'
+		}
+		console.log('++++++++++++++++');
+		console.log('----------1--------');
+		a.f1();
+		a.f1.call(b);
+		console.log('-----------2-------');
+		a.f2();
+		a.f2.call(b);
+		console.log('-----------3-------');
+		a.f3();
+		a.f3.call(b);
+		console.log('-----------4-------');
+		a.f4();
+		a.f4.call(b);
+		console.log('-----------5-------');
+		a.f5();
+		a.f5.call(b);
+		console.log('-----------6-------');
+		a.f6();
+		a.f6.call(b);
+		console.log('-----------7-------');
+		var f7 = a.f7();
+		f7();
+		f7.call(b);
+		console.log('-----------8-------');
+		var f8=a.f8();
+		f8();
+		f8.call(b);
+		console.log('-----------9-------');
+		a.f9();
+		a.f9.call(b);
+		console.log('++++++++++++++++');
+
+</script>
+
+```
+
+结果：
+```html
+ ++++++++++++++++ at test.html:93
+ ----------1-------- at test.html:94
+ AAA at test.html:33
+ BBB at test.html:33
+ -----------2------- at test.html:97
+ window.name at test.html:36
+ window.name at test.html:36
+ -----------3------- at test.html:100
+ AAA at test.html:40
+ BBB at test.html:40
+ -----------4------- at test.html:103
+ window.name at test.html:47
+ window.name at test.html:47
+ -----------5------- at test.html:106
+ AAA at test.html:53
+ BBB at test.html:53
+ -----------6------- at test.html:109
+ f6 at test.html:60
+ AAA at test.html:61
+ -------- at test.html:63
+ window.name at test.html:64
+ f6 at test.html:60
+ BBB at test.html:61
+ -------- at test.html:63
+ window.name at test.html:64
+ -----------7------- at test.html:112
+ AAA at test.html:70
+ window.name at test.html:72
+ BBB at test.html:72
+ -----------8------- at test.html:116
+ AAA at test.html:77
+ AAA at test.html:79
+ AAA at test.html:79
+ -----------9------- at test.html:120
+ window.name at test.html:84
+ window.name at test.html:86
+ window.name at test.html:84
+ window.name at test.html:86
+ ++++++++++++++++ at test.html:123
+```
+
+
+
+说明啥：
+
+- 普通函数，哪个对象调它，this就指向哪个对象；如果是没有对象，直接调用，其实就相当于window对象在调用这个函数，this就指向window了。
+- 箭头函数，箭头函数本身就没有this，所以它的上级作用域的this是谁，它就指向谁，而且是在函数声明时就固定了，以后无论谁去调用它，它的this都指向之前的this。
+
+
+
 ## 4.事件
 
 #### 4.1 常用的事件
