@@ -119,6 +119,8 @@ function fun(a) {
          fun(1,"ad",true);
 ```
 
+
+
 #### 3.4 this
 
 ##### 3.4.1 this的本质
