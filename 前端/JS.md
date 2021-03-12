@@ -100,7 +100,7 @@ var 函数名=function(形参列表){函数体}
 
 #### 3.3 隐形参数
 
-js中虽然声明了参数个数，你还是可以给他随便赋值，并可以通过arguments数组来调用它们
+js中虽然声明了参数个数，你还是可以给他随便赋值，并可以通过arguments数组来调用它们；ES6之后，引入了rest参数的概念，就可以显式的声明一个变量来接收多余参数了，具体参见./ES6/3.函数.md
 
 ```javascript
 function fun(a) {
@@ -164,13 +164,24 @@ obj.sayName(obj);
 
 首先明确几个概念：
 
-1.箭头函数没有this，在它里面使用this统统是使用它外面的环境的this
+1.箭头函数没有this，在它里面使用this统统是使用它外面的环境的this；同样的，以下三个变量在箭头函数之中也是不存在的，指向外层函数的对应变量：`arguments`、`super`、`new.target`：
+
+```javascript
+function foo() {
+  setTimeout(() => {
+    console.log('args:', arguments);
+  }, 100);
+}
+
+foo(2, 4, 6, 8)
+// args: [2, 4, 6, 8]
+```
 
 2.自运行函数（快速调用函数）的调用者是window对象，无论在哪个函数或哪个对象中快速调用,都是window在调用。
 
 3.对象中的属性只能通过“对象名.属性名”去调用
 
-4.js是以函数来划分作用域的。
+4.js是以函数来划分作用域的（ES5）。
 
 
 ```javascript
