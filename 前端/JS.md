@@ -443,4 +443,59 @@ onsubmit比较特殊：
 - 它让我们把所有标签都对象化
 - 我们可以通过document对象访问所有的标签对象
 
-+
+## 6.对象
+
+#### 6.1对象的创建
+
+首先声明一下，js中函数也是对象。
+
+咱平时这种创建对象其实就是创建一个对象实例：
+
+```javascript
+var person1= {
+    name:'xiaoming',
+    age:12
+}
+```
+
+这种直接就是一个对象，没有类的概念。
+
+还有一种创建对象的方法，就是new，这种就有点像java里面的创建对象
+
+```javascript
+//定义了一个方法
+function person(a,b){
+  var name=a;
+  var age=b;
+  console.log(name+'+'+age)
+}
+
+//1.正常调用，就正常执行
+person('xiaoming',4)
+//1.1.正常调用的话，没写return,就返回undefined
+var f=person('xiaoming',4)
+console.log(f)//undefined
+//1.2.这样不是调用。只是把person的指针复制给f2而已
+var f2 = person;
+f2('f2',44);
+//2.new出一个对象啦，person方法就像一个构造函数一样，创建出了一个f3实例，person是类
+var f3 = new person('shabi',6)
+
+```
+
+#### 6.2 原型对象
+
+首先声明一下，js中函数也是对象。
+
+每一个函数对象都有一个参数，叫prototype，它指向自己的原型对象。
+
+而如果你把这个 函数当成构造函数，去new对象了，那么被new出来的这个 对象，一定有一个属性，叫：
+
+`__proto__`，它和这个方法的prototype指向同一个对象，它们的原型对象。用上面的例子证明：
+
+```javascript
+person.prototype===f3.__proto__//true
+```
+
+假如你调用一个f3.sex，系统会先在f3对象中去寻找，找到了就输出，没找到就去原型对象里找，找到了就输出。这就像java中的子类对象和父类对象一个感觉。
+
