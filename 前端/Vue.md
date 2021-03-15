@@ -374,7 +374,63 @@ duixiang:{
 					}
 ```
 
+## 8.表单（v-model）
 
+```html
+<body>
+		<div id='test'>
+		<h1>输入框</h1>
+		<!-- 不加.lazy就是边改边渲染，加上.lazy就可以输入完再渲染 -->
+		<input type="text" v-model.lazy="message"/>
+		<p>{{message}}</p>
+		<h1>文本框</h1>
+		<textarea rows="3" cols="40" placeholder="输入文本" v-model="textarea">
+		</textarea>
+		<p>{{textarea}}</p>
+		
+		<h1>单个复选框</h1>
+			<label for='cb1'>Checkbox</label>
+			<input id='cb1' name="Checkbox" type="checkbox" value="lijiong" v-model="check" true-value="yes">
+			<p>{{check}}</p>
+		<h1>多个复选框</h1>
+		<label>张强</label>
+		<input id='cb2' name="Checkbox" type="checkbox" value="zhangqiang"  v-model="checks">
+		<label>王伟</label>
+		<input id='cb3' name="Checkbox" type="checkbox"  value="wangwei" v-model="checks">
+		<p>{{checks}}</p>
+		<h1>单选框</h1>
+		<!-- 原本html是凭name去判断是不是一组，现在用v-model绑定同一个vue属性就行了 -->
+			<label>人</label>
+			<input name="radio" type="radio" value="人" v-model="radio">
+			<label>狗</label>
+			<input name="radio" type="radio" value="狗子"  v-model="radio">
+			<p>{{radio}}</p>
+		<h1>选择框</h1>
+		你是：
+				<select name="s1"   v-model="s1">
+					<option value="傻逼">SB</option>
+					<option value="智障">ZZ</option>
+					<option value="脑瘫">NT</option>
+					
+					
+				</select>
+				<p>{{s1}}</p>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#test',
+				data:{
+					message:'',
+					textarea:'',
+					check:'',//单个复选框，选上就是true，没选上就是false
+					checks:[],//多个v-model对应这一个数组，选上就是value，没选上就是null
+					radio:'',
+					s1:''
+				}
+			});
+		</script>
+	</body>
+```
 
-
+   
 
