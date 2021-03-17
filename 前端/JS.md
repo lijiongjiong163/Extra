@@ -152,7 +152,7 @@ obj.sayName(obj);
     obj.sayName()   
 ```
 
-
+当你在全局定义function时，此时的调用者其实是window。所以this就是window；最怪的是，箭头函数说好用父函数的this，但window的this好像就是他自己，所以在箭头函数中调this就还是window咯
 
 ##### 3.4.2 this的用法
 
