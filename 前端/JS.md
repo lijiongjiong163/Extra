@@ -480,10 +480,106 @@ var f2 = person;
 f2('f2',44);
 //2.new出一个对象啦，person方法就像一个构造函数一样，创建出了一个f3实例，person是类
 var f3 = new person('shabi',6)
-
+//，but，but，but，此时创建的其实是一个空对象！！
+console.log(f3);//person {}
 ```
 
-#### 6.2 原型对象
+上面的函数明明定义了name和age,还打印出来了第三句的log,为啥里面没有参数呢？？？？这就要解释构造函数生产对象和直接创建对象的关联了：
+
+#### 6.2 构造函数
+
+我们构造一个新对象：
+
+```javascript
+var person1= {
+    name:'xiaoming',
+    age:12,
+    run:function(){
+      console.log(`我是${this.name},我在跑步！`)  
+    }
+}
+```
+
+这样就构造出一个新的对象，但是这样很麻烦，且没有面向对象的思想，我们想要抽象出一个person类，所有人都属于这个person类，怎么做呢？6.1那样写是不行的，要这样写构造函数才行：
+
+```javascript
+function person(a,b){
+  this.name=a;
+  this.age=b;
+  this.run()=function(){
+      console.log(`我是${this.name},我在跑步！`)  
+    }
+}
+var p1= new person('小王',15)
+p1.run();//我是小王,我在跑步！
+```
+
+这样就可以构造出一个有属性的对象，这是为什么呢？我们来比较一下两者的差别
+
+```javascript
+//普通函数
+function person(a,b){
+  var name=a;
+  var age=b;
+}
+//构造函数
+function person(a,b){
+  this.name=a;
+  this.age=b;
+}
+```
+
+很明显，一个是声明变量，一个是给this中的变量赋值，说白了，构造函数就是给this对象中创建并赋值属性。
+
+```javascript
+ var a ={
+   run(){
+    this.name=111;
+    this.age=222;
+   }
+ }
+ console.log(a.name);//undefined
+ a.run();
+ console.log(a.name);//111
+```
+
+就有点像上面对象中的run()函数的作用。
+
+最后，我们来解开new函数的神秘面纱，同时也就能理解构造函数为什么这样写，还能知道new对象和直接写`var person1 = {……}`的联系：
+
+```javascript
+function person(a,b){
+  this.name=a;
+  this.age=b;
+  this.run()=function(){
+      console.log(`我是${this.name},我在跑步！`)  
+    }
+}
+var p1= new person('小王',15)
+```
+
+上面是new一个对象的过程，在new的时候发生了4件事：
+
+```javascript
+var p1 = function(){
+	var obj  ={};
+	obj.__proto__ = person.prototype;
+	person.call(obj);
+	return obj;
+}
+```
+
+1.先定义一个空对象obj
+
+2.将person的原型函数地址，也就是prototype属性的值复制给obj的`__proto__`。（6.3详细介绍）
+
+3.用obj这个对象去调用person这个方法。person给this对象中创建并赋值属性，此时this指向obj，经过了这一步，obj这个对象就被创建并赋值了name,age,run三个属性。
+
+4.返回obj对象给p1
+
+
+
+#### 6.3 原型对象
 
 首先声明一下，js中函数也是对象。
 
