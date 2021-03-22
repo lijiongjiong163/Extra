@@ -88,3 +88,32 @@ script标签的type要改成module
 <script src="./src/js/test.js" type="module"></script>
 ```
 
+## 4.开发步骤
+
+在实际开发中，很少会直接从html里去引入模块，标准流程如下：
+
+1. 而是将所有的import语句全部放入一个js（例如app.js），然后使用babel将所有代码（要使用的模块js文件，还有app.js）转化成es5。
+
+```javascript
+//app.js
+import * as m1 from './export';
+import m2 from './defaultexport';
+m1.getList();
+m2.fly();
+```
+
+2. 转化完成后还是不能直接引用，需要再用打包工具打包后，生成的文件才能供html文件引用
+
+```markdown
+//将app.js打包成bundle.js
+npx browserify .\dist\import-export\app.js  -o .\dist\bundle.js 
+```
+
+此时就可以引用bundle.js了
+
+```html
+<script src="./dist/bundle.js" type="module"></script>
+```
+
+
+
