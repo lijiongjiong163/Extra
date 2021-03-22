@@ -8,7 +8,9 @@
 npm i -g babel-cli --save-dev
 ```
 
-2.创建babel的配置文件：  .babelrc
+-g 为全局安装，不想全局装可不加
+
+3.创建babel的配置文件：  .babelrc
 
 并在其中填写
 
@@ -19,13 +21,13 @@ npm i -g babel-cli --save-dev
 }
 ```
 
-3.然后安装这个转码器：
+4.然后安装这个转码器：
 
 ```markdown
 npm install --save-dev babel-preset-es2015
 ```
 
-4.执行转码命令，将src中的文件转码，转码后文件放到dist文件夹
+5.执行转码命令，将src中的文件转码，转码后文件放到dist文件夹
 
 ```markdown
 babel src -d dist
@@ -41,6 +43,14 @@ babel test.js
 //转换并保存到新文件(--out-file或者-o都行)
 babel es6.js --out-file es5.js
 ```
+
+6.全局装的话可以直接使用以上的语句，如果不是全局装，必须在上面的语句前加npx
+
+```markdown
+npx babel test.js
+```
+
+
 
 # 自定义脚本
 
