@@ -65,7 +65,44 @@ import * as user from './userApi.js'
 user.default.getList();
 ```
 
-## 3.在浏览器中使用es6模块化
+## 3.混合使用
+
+假如你有一个文件test1.js，内容如下：
+
+```javascript
+const Demo1 = {
+    a:1,
+    b:2
+}
+export class Demo2{
+}
+export function getList(){
+    console.log('getList')
+}
+export default Demo1
+```
+
+那么你可以这样引入:
+
+```js
+import Demo1,{getList,Demo2} from './test1'
+```
+
+这其中，因为Demo1是默认暴露，所以不用加花括号，其它两个都是分别暴露，所以要加花括号。
+
+还有一个方法：
+
+```js
+import * as test from './test1'
+//就是使用时相对麻烦，默认暴露必须用test.default.Demo1的方式使用
+console.log(test.default.Demo1);
+console.log(test.getList);
+console.log(test.Demo2);
+```
+
+
+
+## 4.在浏览器中使用es6模块化
 
 方式一，直接在html中写js引入：
 
@@ -88,7 +125,7 @@ script标签的type要改成module
 <script src="./src/js/test.js" type="module"></script>
 ```
 
-## 4.开发步骤
+## 5.开发步骤
 
 在实际开发中，很少会直接从html里去引入模块，标准流程如下：
 
@@ -102,7 +139,7 @@ m1.getList();
 m2.fly();
 ```
 
-2. 转化完成后还是不能直接引用，需要再用打包工具打包后，生成的文件才能供html文件引用
+2. 转化完成后还是不能直接引用，需要再用打包工具（webpack）打包后，生成的文件才能供html文件引用
 
 ```markdown
 //将app.js打包成bundle.js
