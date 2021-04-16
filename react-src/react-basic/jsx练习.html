@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>jsx语法</title>
+		<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+		<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+		<!-- 生产环境中不建议使用 -->
+		<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>	</head>
+		
+	<body>
+		<div id="root">
+			
+		</div>
+		<script type="text/babel">
+			var title = '前端框架'
+			var data =['Vue','React','安哥拉']
+			
+			//1.创建虚拟dom
+			var VDOM = (
+			<div>
+				<h1 >{title/*他妈在这注释不要{}*/}</h1>
+				<ul>
+					{data.map((haha,index)=>{
+						console.log(haha+index)/*这里是js语法,调haha不需要{}*/
+						return <li key = {index}>{haha}{/*这里就成jsx语法了*/}</li>/*虚拟DOM还非要个key,就tm离谱*/
+					})}   {/*花括号里必须要表达式才行*/}
+				</ul>
+			</div>
+				
+			)
+			//2.渲染到页面
+			ReactDOM.render(VDOM,document.getElementById('root'))
+		</script>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>jsx语法</title>
+		<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+		<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+		<!-- 生产环境中不建议使用 -->
+		<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>	</head>
+		<style>
+			.title{
+				background-color: aqua;
+			}
+		</style>
+	<body>
+		<div id="root">
+			
+		</div>
+		<script type="text/babel">
+			const VID = "tEsT"
+			const text = "jSx is Sb"
+			const text2 = "确实"
+			//1.创建虚拟dom
+			var VDOM =
+			 <div>{/*1.定义dom时不要写引号;2.必须只有一个根元素*/}
+			<h1 className='title' style={{color:'red',fontSize:'100px'}} id={VID.toLowerCase()}>{/*3.不能用class，要用className；4.内联样式，要用双花括号包裹多个键值对的形式去写*/}
+			{text}{/*5.标签中想要调用或混入JS表达式时，请使用{}*/}
+			</h1>
+			<h2>{text2}</h2>
+			<input type='text'/> {/*6.标签必须闭合*/}
+			</div>
+			//2.渲染到页面
+			ReactDOM.render(VDOM,document.getElementById('root'))
+		</script>
+	</body>
+</html>
