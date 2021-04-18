@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>hello react</title>
+		<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+		<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+		<!-- 生产环境中不建议使用 -->
+		<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+        <script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+
+	</head>
+	<body>
+		
+		<div id="root">
+			
+		</div>
+        <div id="root2">
+			
+		</div>
+		<script type="text/babel"> /*此处一定要写babel*/
+        
+		class Person extends React.Component{
+            
+            render(){
+                //const {props}=this;
+                const  {name,age,sex}=this.props;
+                console.log(this.props);
+                
+                return (<ul>
+                        <li>{name}</li>
+                        <li>{age}</li>
+                        <li>{sex}</li>
+                    </ul>)
+            }
+        static propTypes ={
+            //1.16版本后需要引入prop-types依赖包，引入后就多了一个对象：PropTypes
+            name:PropTypes.string.isRequired,
+            sex:PropTypes.string,
+            age:PropTypes.number
+        }//react组件对象本身有这么一个属性，里面可以给传入的props里的值设定规则
+        static defaultProps ={
+            sex:"不男不女",
+            age:18
+        }  //react组件对象本身有这么一个属性，里面可以给传入的props里的值设定默认值
+            
+        }
+        //渲染组件到真实dom
+        ReactDOM.render(<Person name="小张" age={18} sex="女"/>,document.getElementById('root'))
+        const p1 = {name:100 ,age:20 }
+        ReactDOM.render(<Person {...p1}/>,document.getElementById('root2'))
+
+		</script>
+	</body>
+</html>

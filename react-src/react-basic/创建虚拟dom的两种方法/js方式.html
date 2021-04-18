@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>js方式创建虚拟dom</title>
+		<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+		<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+		
+	</head>
+	<body>
+		
+		<div id="root">
+			<div id="111">
+				什么！！！
+			</div>
+		</div>
+		<script type="text/javascript"> 
+		 //1.创建虚拟DOM 
+		const VDOM = React.createElement('h1',{id:'title'},React.createElement('span',{},'HelloReact'))
+		/*js写法就是不停的用React.createElement方法去创建虚拟dom；其实jsx经过babel翻译过来也是这样子*/
+		//2.渲染虚拟DOM到页面 
+		
+		ReactDOM.render(VDOM,document.getElementById('root'));
+		</script>
+	</body>
+</html>

@@ -119,11 +119,67 @@ function fun(a) {
          fun(1,"ad",true);
 ```
 
+#### 3.4 函数对象
 
+函数本身就是一个对象，它有一些属性和方法可以使用。想要使用直接用函数名.属性名即可调用
 
-#### 3.4 this
+```javascript
+function person()
+{
+  ……
+}
+person.name;//es6中会输出person
+person.call(Obj)//将person中的this指向Obj
+person.prototype
+```
 
-##### 3.4.1 this的本质
+**注意：**要想给函数对象中加入属性或函数，只有两种办法：
+
+```javascript
+// 方法一
+person.foo = true;
+
+// 方法二
+person['a' + 'bc'] = 123;
+```
+
+试一下：
+
+```javascript
+ function person()
+{
+  var sex = '女';
+}
+person.age =12  
+person['a'+'b']='test'  
+console.log(person.age);
+console.log(person.ab);
+
+console.log(person.sex);
+```
+
+结果：
+
+![image-20210322101408884](assets/image-20210322101408884.png)
+
+说明函数里声明的变量，并不能用函数对象去调用。
+
+这时候你再试试用这个函数new一个对象：
+
+```javascript
+var p1 = new person();
+console.log(p1)
+```
+
+结果：
+
+![image-20210322101949665](assets/image-20210322101949665.png)
+
+是个空对象，只有个`__protp__`,指向person的prototype。所以说，**函数对象和new出来的对象之间的属性是不相通的。**
+
+#### 3.5 this
+
+##### 3.5.1 this的本质
 
 对象中的函数，其实对象和函数没啥关系，JS之父通过this将他们强行关联起来：
 
@@ -154,13 +210,13 @@ obj.sayName(obj);
 
 当你在全局定义function时，此时的调用者其实是window。所以this就是window；最怪的是，箭头函数说好用父函数的this，但window的this好像就是他自己，所以在箭头函数中调this就还是window咯
 
-##### 3.4.2 this的用法
+##### 3.5.2 this的用法
 
 ![](assets/javascript非严格模式下this的用法.png)
 
 
 
-#### 3.5函数中的this（和箭头函数的区别）
+#### 3.6函数中的this（和箭头函数的区别）
 
 首先明确几个概念：
 

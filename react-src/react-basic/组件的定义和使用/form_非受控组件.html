@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>hello react</title>
+		<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+		<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+		<!-- 生产环境中不建议使用 -->
+		<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+	</head>
+	<body>
+		
+		<div id="root">
+			
+		</div>
+		<script type="text/babel"> /*此处一定要写babel*/
+        
+		class Demo extends React.Component{
+            //React.createRef()调用后可以返回一个容器，该容器可以存储被ref标识的节点对象
+            username = React.createRef();
+            password = React.createRef();
+            render(){
+                return (
+                    <form action="www.baidu.com" onSubmit={this.mySubmit}>
+                        <input ref ={this.username} name="username"type="text" placeholder="账号"/><br/>
+                        <input ref ={this.password} name="password" type="password" placeholder="密码"/><br/>
+                        <button>提交</button>    
+                    </form>
+                )
+            }
+            mySubmit =(event)=>{
+                event.preventDefault();//阻止表单的默认提交事件
+                console.log('账号',this.username.current.value);
+                console.log('密码',this.password.current.value);
+                
+            }
+        }
+        //渲染组件到真实dom
+        ReactDOM.render(<Demo/>,document.getElementById('root'))
+		</script>
+	</body>
+</html>
