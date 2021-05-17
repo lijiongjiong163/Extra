@@ -20,6 +20,14 @@ export default class Header extends Component {
         
     }
     render() {
+        const abc ={
+            name:'啥的',
+            onRef: () => {
+                console.log('this：',this);
+                
+              },
+        }
+        abc.onRef()
         return (
             <div>
                 <h1>计划表</h1>
