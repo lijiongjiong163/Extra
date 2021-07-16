@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="div1">
+			
+			<span v-bind:class="color">啥几把玩意</span>
+		</div>
+		<button onclick="change()">变化</button>
+		<script type="text/javascript">
+		var haha= {
+				
+				color:'red'
+		}
+		var vm = new Vue({
+			el:'#div1',
+			data:haha
+		});
+		var change = function(){
+			
+			if(haha.color == 'blue'){
+				haha.color = 'red';
+			}else{
+				vm.color = 'blue';
+			}
+			
+		}
+		
+		</script>
+		<style>
+			.red{
+				color: red;
+			}
+			.blue{
+				color: blue;
+			}
+		</style>
+	</body>
+</html>

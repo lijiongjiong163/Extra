@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-for学习</title>
+		<script src="./vue.js" type="text/javascript" charset="UTF-8"></script>	
+	</head>
+	<body>
+		<ul id ='ul1'>
+			<li v-for="shabi,inde in what">{{title}}{{inde}}-{{shabi.name}}</li>
+			<li v-for=" value,name of duixiang">{{name}}:{{value}}</li>
+		</ul>
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#ul1',
+				data:{
+					title: '人物名称：',
+					what:[
+						{name:'lijiong'},
+						{name:'wangwei'},
+						{name:'mage'}
+					],
+					duixiang:{
+						name:'火锅',
+						sex:'母',
+						age:2
+					}
+				}
+			});
+		</script>
+		
+		
+	</body>
+</html>
