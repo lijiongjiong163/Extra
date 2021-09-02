@@ -16,7 +16,9 @@ export default class Count extends Component {
     increaseIfOdd=() => {
        if(store.getState()%2===1){
         const {value}=this.selectNumeber
-        store.dispatch(createIncreaseAction(value*1))
+        let a=store.dispatch(createIncreaseAction(value*1))
+        console.log(a);
+        
        }
         
     }

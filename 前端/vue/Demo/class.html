@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Class 与 Style 绑定</title>
+		<script src="./js/vue.js" type="text/javascript" charset="UTF-8"></script>
+		<script type="text/javascript">
+			Vue.config.productionTip = false;   //阻止vue在启动时生成生产提示
+		</script>
+	</head>
+	<body>
+		<div id='div1' v-bind:class="[isRed ? 'red' : 'green' ]">皮</div>
+		
+		<div  id='div2'
+		  class="static"
+		  v-bind:class="{ active: isActive,'text-danger': hasError ,sb:isSb}"
+		>还就那个捞的嘛</div>
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#div1',
+				data:{
+					isRed:false 
+				}
+			});
+			var vm2 = new Vue({
+				el:'#div2',
+				data: {
+				  isActive: true,
+				  hasError: true,
+				  isSb:true
+				}
+			});
+			
+		</script>
+		<style>
+			.red{
+				color: #FF0000;
+			}
+			.green{
+				color: chartreuse;
+			}
+		</style>
+	</body>
+</html>

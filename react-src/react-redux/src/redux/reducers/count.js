@@ -6,6 +6,8 @@ export default function countReducer(preState=init,action){
     
     switch (type) {
         case INCREASE:
+            console.log('countReducer',preState);
+            
             return preState+data;
         case DECREASE:
             return preState-data;
