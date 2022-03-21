@@ -651,3 +651,76 @@ person.prototype===f3.__proto__//true
 
 假如你调用一个f3.sex，系统会先在f3对象中去寻找，找到了就输出，没找到就去原型对象里找，找到了就输出。这就像java中的子类对象和父类对象一个感觉。
 
+## 7.数据代理
+
+先介绍一个函数：
+
+Object.defineProperty()
+
+它可以给对象添加属性。
+
+一共三个参数：
+
+- 对象名：要给哪个对象添加 参数，就把哪个对象传进去。
+- 属性名：要给目标对象添加什么属性，就把属性名传进去。
+- 配置对象：这个属性相关的配置
+
+例如：
+
+```js
+Object.defineProperty(person,'age',{value:18})
+```
+
+​	这样就给person对象 加了个age属性，值为 18。
+
+**重点：可以使用get和set来操作这个属性的值**
+
+例如：
+
+```js
+//定义一个数 
+let hello =123;
+let obj1 ={
+        x:1  
+          }
+Object.defineProperty(obj1,'z',{
+	get(){
+        return hello
+       },
+	set(a){
+    	hello=a;
+    }
+   });
+```
+
+结果：
+
+![1632280943816](C:\Users\LiJiong\AppData\Roaming\Typora\typora-user-images\1632280943816.png)
+
+z被加进了obj1对象中，而且值还是小点点。这时候你如果点这个小点点，js就会自动调用get方法，将return的值加到z上，同样，如果你修改z，js也不是直接就修改z，而是调用set方法，将你修改的值作为首参传入set方法。
+
+数据代理就是基于这个方法 来做的：
+
+```js
+            let obj1 ={
+                x:1
+                
+            }
+            let obj2 ={
+                y:2
+            }
+           
+             Object.defineProperty(obj1,'y',{
+                 get(){
+                     return obj2.y
+                 },
+                 set(a){
+                     obj2.y=a;
+                 }
+            });
+             
+```
+
+这样就把obj2中 的y加到了obj1中，且任意改其中一个y，另一个跟着改变：
+
+![1632281517657](C:\Users\LiJiong\AppData\Roaming\Typora\typora-user-images\1632281517657.png)
