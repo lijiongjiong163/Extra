@@ -668,12 +668,47 @@ Object.defineProperty()
 例如：
 
 ```js
-Object.defineProperty(person,'age',{value:18})
+Object.defineProperty(person,'age',{value:18})//配置对象常用的属性：value，可以吧value的值赋值给参数二（age）
 ```
 
 ​	这样就给person对象 加了个age属性，值为 18。
 
-**重点：可以使用get和set来操作这个属性的值**
+**ps:**这种方法添加的属性和对象 本身就有的属性还是有一些区别的：
+
+区别一：控制台颜色不一样，使用defineProperty()添加的值颜色比较浅
+
+![1647835744631](C:\Users\LiJiong\AppData\Roaming\Typora\typora-user-images\1647835744631.png)
+
+区别二：使用defineProperty()添加的值不参与遍历
+
+这里介绍一个方法：**Object.keys()**
+
+它可以传入一个对象，把这个对象的所有属性名遍历输出一个数组。
+
+```js
+console.log(Object.keys(person))
+```
+
+![1647835950720](C:\Users\LiJiong\AppData\Roaming\Typora\typora-user-images\1647835950720.png)
+
+
+
+从结果看，age并没有被输出到这个数组里。
+
+如果想要这个属性被遍历，可以配置enumerable属性为true即可。
+
+```js
+Object.defineProperty(person,'age',{
+    value:18,
+    enumerable:true
+})
+```
+
+
+
+
+
+#### 重点：可以使用get和set来操作这个属性的值
 
 例如：
 
