@@ -1,4 +1,23 @@
-### 注意点
+### 1.vue最简demo
+
+```html
+<div id = "root">
+            <h1>Hello,{{name}}</h1>
+</div>
+<script type="text/javascript">
+			var obj =new Vue({
+				el:'#app',//el属性：传入选择器，用来绑定元素
+				data:{
+					message:'啥几把玩意',
+					name:'Vue'
+				}	//data属性：传入对象
+			});
+         </script>
+```
+
+
+
+### 2.注意点
 
 #### - Vue实例和容器之间是11对应的关系。
 
@@ -90,4 +109,77 @@ function instance_of(L, R) {//L 表示左表达式，R 表示右表达式
 
 
 当我们了解了new的原理和instanceof原理后，就能理解了。
+
+### 3.data和el的两种写法
+
+#### 3.1 el两种写法 ：
+
+```html
+<div id="root" >
+            <h1>hello,{{name}}</h1>
+</div>
+//第一种：使用el来绑定；
+<script>
+            let vm =new Vue({
+                el:"#root",
+                data:{
+                    name:"路飞"
+                }
+            });
+</script>
+//第二种：使用$mount方法（在vue原型对象上的一个方法）
+<script>
+            let vm =new Vue({
+                data:{
+                    name:"路飞"
+                }
+            });
+            vm.$mount("#root");
+</script>
+
+```
+
+两种方法都可以，但是第二种相对灵活，因为可以在js代码中去调$mount函数，就可以动态的去使用它。
+
+#### 3.2 data的两种写法：
+
+```html
+<div id="root" >
+            <h1>hello,{{name}}</h1>
+</div>
+//第一种：对象形式；
+<script>
+            let vm =new Vue({
+                el:"#root",
+                data:{
+                    name:"路飞"
+                }
+            });
+</script>
+//第二种：函数形式
+<script>
+            let vm =new Vue({
+                 el:"#root",
+                data:function(){
+                    return{
+                        name:"乌索普"
+                    }
+                }
+            });     
+</script>
+//根据 es6语法，对象内函数可以简写，函数形式可以变化为：
+<script>
+            let vm =new Vue({
+                 el:"#root",
+                data(){
+                    return{
+                        name:"乌索普"
+                    }
+                }
+            });     
+</script>
+
+```
+
+**注意：**由Vue管理的函数，不能写成箭头函数的形式，一旦写了箭头函数，其中的this就不再是Vue实例了。
 
