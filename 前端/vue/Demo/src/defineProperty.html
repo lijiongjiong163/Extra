@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <!-- 数据代理 -->
+    <head>
+        <meta charset="utf-8">
+		<title>Class 与 Style 绑定</title>
+		<script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+		<script type="text/javascript">
+			Vue.config.productionTip = false;   //阻止vue在启动时生成生产提示
+           
+		</script>
+    </head>
+    <body>
+        <div id="root">
+            <h1>hello,{{name}}</h1>
+        </div>
+        <script type="text/javascript">
+        let hello =123;
+            let obj1 ={
+                x:1
+                
+            }
+            let obj2 ={
+                y:2
+            }
+           
+             Object.defineProperty(obj1,'y',{
+                 get(){
+                     return obj2.y
+                 },
+                 set(a){
+                     obj2.y=a;
+                 }
+            });
+             
+        </script>
+    </body>
+</html>

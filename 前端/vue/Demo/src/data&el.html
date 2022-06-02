@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <!-- data和el的两种写法 -->
+	<head>
+		<meta charset="utf-8">
+		<title>Class 与 Style 绑定</title>
+		<script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+		<script type="text/javascript">
+			Vue.config.productionTip = false;   //阻止vue在启动时生成生产提示
+           
+		</script>
+	</head>
+	<body>
+        <div id="root" >
+            <h1>hello,{{name}}</h1>
+        </div>
+        <script>
+            let vm =new Vue({
+                //el:"#root",
+                /* data:{
+                    name:"路飞"
+                } */
+                data:function(){
+                    return{
+                        name:"乌索普"
+                    }
+                }
+            });
+            vm.$mount("#root");
+
+        </script>
+    </body>
+</html>

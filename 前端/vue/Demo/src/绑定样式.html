@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<!-- 绑定样式 -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Class 与 Style 绑定</title>
+    <script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+    <script type="text/javascript">
+        Vue.config.productionTip = false;   //阻止vue在启动时生成生产提示
+
+    </script>
+    <style>
+        .basic {
+            border: 1px solid;
+        }
+
+        .happy {
+            background-color: red;
+        }
+
+        .sad {
+            background-color: darkblue;
+        }
+
+        .test1 {
+            background-color: green;
+        }
+
+        .test2 {
+            border: 10px solid;
+        }
+
+        .test3 {
+            font-size: large;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <!--  字符类型          -->
+        <div class="basic" :class="mood" @click="changeMood">hello,{{name}}</div>
+        <!--  数组类型  -->
+        <div class="basic" :class="classArr" @click="changeMood2">hello,{{name}}</div>
+        <!-- 对象类型 -->
+        <div class="basic" :class="classObj" @click="changeMood3">hello,{{name}}</div>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#root",
+            data: function () {
+                return {
+                    name: "乌索普",
+                    mood: "happy",
+                    classArr: ['test1', 'test2'],
+                    classObj: {
+                        test1: true,
+                        test2: false
+                    }
+                }
+            },
+            methods: {
+                changeMood() {
+                    this.mood = this.mood === 'happy' ? 'sad' : 'happy'
+                },
+                changeMood2() {
+                    this.classArr.push('test3');
+                },
+                changeMood3() {
+                    this.classObj.test1 = !this.classObj.test1
+                }
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

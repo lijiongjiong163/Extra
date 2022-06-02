@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<!-- 绑定样式 -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Class 与 Style 绑定</title>
+    <script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+    <script type="text/javascript">
+        Vue.config.productionTip = false;   //阻止vue在启动时生成生产提示
+
+    </script>
+
+</head>
+
+<body>
+    <div id="root">
+        <ul>
+            <input type="text" v-model="keyWord">
+            <li v-for="(person,index) in newPersons" :key = "person.id">{{person.name}}---{{person.age}}</li>
+        </ul>
+    </div>
+   <script>
+/*
+        let vm = new Vue({
+            el: "#root",
+            data: function () {
+                return {
+                    keyWord:'',
+                    persons:[
+                        {id:001,name:'马冬梅',age:12},
+                        {id:002,name:'周冬雨',age:13},
+                        {id:003,name:'周杰伦',age:14},    
+                        {id:004,name:'林依伦',age:15}
+
+                    ],
+                    newPersons:[]
+                }
+            },
+            watch:{
+                keyWord:{
+                    immediate:true,
+                    handler(newVal){
+                        this.newPersons=this.persons.filter((person)=>{
+                            return person.name.indexOf(newVal) !==-1;
+                        })
+                    }
+                }
+            }
+
+        }); 
+
+*/
+let vm = new Vue({
+            el: "#root",
+            data: function () {
+                return {
+                    keyWord:'',
+                    persons:[
+                        {id:001,name:'马冬梅',age:12},
+                        {id:002,name:'周冬雨',age:13},
+                        {id:003,name:'周杰伦',age:14},    
+                        {id:004,name:'林依伦',age:15}
+
+                    ],
+                    
+                }
+            },
+            computed:{
+                newPersons(){
+                    return this.persons.filter((person)=>{
+                            return person.name.indexOf(this.keyWord) !==-1;
+                        })
+                }
+            }
+        }); 
+    </script>
+</body>
+
+</html>

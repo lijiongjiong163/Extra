@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <!-- data和el的两种写法 -->
+	<head>
+		<meta charset="utf-8">
+		<title>Class 与 Style 绑定</title>
+		<script src="../js/vue.js" type="text/javascript" charset="UTF-8"></script>
+		<script type="text/javascript">
+			Vue.config.productionTip = false;   //阻止vue在启动时生成生产提示
+           
+		</script>
+        <style>
+            *{
+                margin-top: 20px;
+            }
+            .demo1{
+                height: 70px;
+                background-color: aquamarine;
+            }
+            .demo2{
+                height: 50px;
+                background-color:blueviolet;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="root" >
+            <h1>hello,{{name}}</h1>
+            <a :href="url" v-on:click.prevent="showinfo">点此跳转</a>
+            <div class="demo1" @click="showinfo1">
+                <div class="demo2" @click="showinfo1">
+                <button @click.stop="showinfo">点我</button>
+            </div>
+            </div>
+            <input type="text" @keyUp="submit">
+        </div>
+        <script>
+            let vm =new Vue({
+            
+                data(){
+                    return{
+                        name:"乌索普",
+                        url:"http://www.baidu.com"
+                    }
+                },
+                methods:{
+                    showinfo(e){
+                        alert("事件的对象");
+                       // e.preventDefault();
+                    },
+                    showinfo1(e){
+                        alert("showinfo1");
+                       // e.preventDefault();
+                    },
+                    submit(e){
+                        console.log(e.target.value);
+                    }
+                }
+            });
+            vm.$mount("#root");
+
+        </script>
+    </body>
+</html>
