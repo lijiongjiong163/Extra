@@ -63,3 +63,36 @@
 | git checkout 分支名 | 切换分支                     |
 | git merge 分支名    | 把指定的分支合并到当前分支上 |
 
+### 5.1合并冲突
+
+当发生冲突时，就不是一句git merge 能够解决的事情了。
+
+1. 假如我们要把hot-fix合并到master分支上，我们先切回master分支，然后使用 git merge hot-fix 命令来合并，发现有报错，hello.txt冲突了。
+
+![1655956101425](C:\Users\LiJiong\AppData\Roaming\Typora\typora-user-images\1655956101425.png)
+
+2. 此时，括号中的master变成了master|merging，且使用git status查看状态时，发现hello.txt又变成了红色，写着两个分支都更改了它。
+
+![1655956298153](C:\Users\LiJiong\AppData\Roaming\Typora\typora-user-images\1655956298153.png)
+
+3. 此时打开hello.txt，发现内容变了
+
+
+
+![1655956367935](C:\Users\LiJiong\AppData\Roaming\Typora\typora-user-images\1655956367935.png)
+
+<<<<<<HEAD
+
+=========
+
+\>>>>>>>> hot-fix
+
+从head到====，是本分支的内容，从=====到hot-fix，是hot-fix的内容。需要手动处理 冲突代码，将代码合并好，然后在把上面的多余符号删掉，再保存。
+
+4. 此时已经手动解决了冲突，但使用git status查看一下，还是红色的。所以还是要重新加一下暂存区（git add hello.txt）。
+5. 再重新提交一下，注意，此时的提交不能带文件名，直接git commit -m "日志信息" 就行了。经过这一步，就算完成了，再看括号中的master|merging变回了master，大功告成 。
+
+
+
+
+
